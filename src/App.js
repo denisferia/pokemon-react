@@ -1,10 +1,9 @@
-import './App.scss';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h3>Bulbasaur</h3>
-      <p>This is a new pokemon</p>
+
     </div>
   );
 }
