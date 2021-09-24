@@ -4,8 +4,11 @@ import './PokeBall.scss'
 
 const PokeBall = ({url, name}) => {
 
+  console.log(url)
+
   const [details, setDetails] = useState(null);
   const [releasePokemon, setReleasedPk] = useState(false);
+  const [errorMsg, setError] = useState(false);
 
   useEffect(() => {
 
@@ -17,6 +20,7 @@ const PokeBall = ({url, name}) => {
 
       .catch( (error)=>{
         console.log("error", error);
+        setError(true);
       })
 
     }, [url]);
@@ -27,12 +31,13 @@ const PokeBall = ({url, name}) => {
 
   return (
     <div className="pokeBall-wrapper">
+      {errorMsg && <div className={`error-msg`}><h3>An error has occurred. Please reload the page.</h3></div>}
       {details &&
         <div className={`pokeBall ${name}`}>
           <div className={`pk-glimpse ${name}`} onClick={()=> handleClick()}>
             <h3>{name}</h3>
             <div className={`pokemon-img`}>
-              <img src={details.sprites.front_default} alt={name} title={name}/>
+              <img src={details.sprites.front_default} alt={name} title={name} />
             </div>
           </div>
           {releasePokemon &&

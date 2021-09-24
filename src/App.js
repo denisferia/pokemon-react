@@ -1,10 +1,11 @@
-import './App.scss';
 import React, {useState, useEffect} from 'react';
 import PokeBall from './PokeBall/PokeBall.js';
+import './App.scss';
 
 function App() {
 
   const [allPokemon, setPokemon] = useState([]);
+  const [errorMsg, setError] = useState(false);
 
   useEffect(() => {
 
@@ -14,20 +15,11 @@ function App() {
         let rawPokemonList = await RESPONSE.json();
         rawPokemonList = rawPokemonList.results;
 
-        rawPokemonList.forEach( (pokemon,i) => {
-          let url = pokemon.url;
-
-          fetch(url)
-            .then(response => response.json() )
-            .then(details => {
-              rawPokemonList[i] = {...pokemon, details}
-            })
-
-          });
-
         setPokemon(rawPokemonList);
+
       } catch (error) {
-        console.log("error", error);
+        console.log("error while fetching pokemon list", error);
+        setError(true);
       }
     };
 
@@ -38,14 +30,14 @@ function App() {
 
   return (
     <div className="App pokemon-app">
-
+      <section className={`pk-logo`} />
       <section className={`pokemon-list`}>
+      {errorMsg && <div><h3>An error has occurred. Please reload the page.</h3></div>}
       {
         allPokemon.length > 0 && allPokemon.map( (pokemon, i) =>
           <div key={i}>
             <PokeBall url={pokemon.url} name={pokemon.name}/>
           </div>
-
         )
       }
       </section>
