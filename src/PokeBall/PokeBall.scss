@@ -1,6 +1,56 @@
+.pokeBall-wrapper{
+  .pk-glimpse {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.pokemon-img {
+  text-align: center;
+  position: relative;
+  width: 70px;
+  height: 70px;
+
+  .pokeBall-closed,
+  img {
+    position: absolute;
+    top:-5px;
+    left: -5px;
+    transition: all 250ms ease-in-out;
+  }
+
+  .pokeBall-closed {
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    background: url("/assets/pngwing.png") no-repeat center;
+    background-size: contain;
+    opacity: 1;
+  }
+
+  img {
+   z-index: 0;
+    width: 80px;
+    height: auto;
+    opacity: 0;
+  }
+
+  &:hover {
+    .pokeBall-closed {
+      opacity: 0;
+    }
+
+    img {
+      opacity: 1;
+    }
+  }
+}
+
 .pokeBall-shadow {
   position: fixed;
-  z-index: 0;
+  z-index: 2;
   top:0;
   left: 0;
   width: 100%;

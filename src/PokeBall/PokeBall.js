@@ -25,6 +25,10 @@ const PokeBall = ({url, name}) => {
     releasePokemon ? setReleasedPk(false) : setReleasedPk(true);
   }
 
+  const handleClose = (childClose) =>{
+    setReleasedPk(childClose)
+  }
+
   return (
     <div className="pokeBall-wrapper">
       {details &&
@@ -32,12 +36,13 @@ const PokeBall = ({url, name}) => {
           <div className={`pk-glimpse ${name}`} onClick={()=> handleClick()}>
             <h3>{name}</h3>
             <div className={`pokemon-img`}>
-              <img src={details.sprites.front_default} alt={name} title={name}/>
+              <div className={`pokeBall-closed`} />
+              <img src={details.sprites.front_default} alt={name} />
             </div>
           </div>
           {releasePokemon &&
             <div className={`pk-released`}>
-              <Pokemon details={details} />
+              <Pokemon details={details} released={handleClose}/>
               <div className={`pokeBall-shadow`} onClick={()=> setReleasedPk(false)}/>
             </div>
           }

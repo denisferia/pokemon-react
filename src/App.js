@@ -10,7 +10,7 @@ function App() {
 
     const fetchPokemon = async () => {
       try {
-        const RESPONSE = await fetch('https://pokeapi.co/api/v2/pokemon?limit=500/');
+        const RESPONSE = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151/');
         let rawPokemonList = await RESPONSE.json();
         rawPokemonList = rawPokemonList.results;
 
@@ -38,14 +38,13 @@ function App() {
 
   return (
     <div className="App pokemon-app">
-
+      <div className={`pk-logo`} />
       <section className={`pokemon-list`}>
       {
         allPokemon.length > 0 && allPokemon.map( (pokemon, i) =>
-          <div key={i}>
+          <div key={i}  className={`pk-item`}>
             <PokeBall url={pokemon.url} name={pokemon.name}/>
           </div>
-
         )
       }
       </section>

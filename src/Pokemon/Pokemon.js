@@ -1,19 +1,23 @@
 import React from 'react';
 import './Pokemon.scss'
 
-const Pokemon = ({details}) => {
+const Pokemon = ({details, released}) => {
 
   const {abilities, sprites, weight, height, name, types, id} = details;
+
+  const handleClose = () => {
+    released(false);
+  }
 
   return (
       <div className={`pk-full ${name}`}>
         <h3>{name}</h3>
-        <div className={`pk-img`}>
-          <img alt={name} title={name} src={sprites.front_default} />
-          <img alt={name} title={name} src={sprites.back_default} />
-        </div>
         <div className={`pk-detail-list`}>
           <ul>
+            <li className={`pk-id`}>
+              <h4>ID</h4>
+              <p>{id}</p>
+            </li>
             <li className={`pk-width`}>
               <h4>Weight</h4>
               <p>{weight}</p>
@@ -21,10 +25,6 @@ const Pokemon = ({details}) => {
             <li className={`pk-height`}>
               <h4>Height</h4>
               <p>{height}</p>
-            </li>
-            <li className={`pk-id`}>
-              <h4>ID</h4>
-              <p>{id}</p>
             </li>
             <li className={`pk-type`}>
               <h4>Type</h4>
@@ -50,9 +50,11 @@ const Pokemon = ({details}) => {
             </li>
           </ul>
         </div>
-        <div className={`pk-evolution`}>
-
+        <div className={`pk-img`}>
+          <img alt={name} title={name} src={sprites.front_shiny} />
+          <img alt={name} title={name} src={sprites.back_shiny} />
         </div>
+        <div className={`pk-close`} onClick={handleClose}/>
       </div>
   )
 }
